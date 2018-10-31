@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wq.springboot.mapper.AcctRoleMapper">
+    <!-- 注意：抽离roleMap -->
+    <resultMap id="roleMap" type="com.wq.springboot.entity.AcctRole">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <!-- 一对多 -->
+        <collection property="acctRoleAuthorities" ofType="com.wq.springboot.entity.AcctRoleAuthority">
+            <result property="role_id" column="role_id"/>
+            <result property="authority_id" column="authority_id"/>
+            <!-- 一对一 -->
+            <collection property="acctAuthority" ofType="com.wq.springboot.entity.AcctAuthority">
+                <id property="id" column="authority_id"/>
+                <result property="name" column="authority_name"/>
+            </collection>
+        </collection>
+    </resultMap>
+
+    <select id="list" resultMap="roleMap">
+        SELECT
+          r.*,ra.role_id,ra.authority_id,a.name authority_name
+        FROM
+          acct_role r
+        LEFT JOIN
+          acct_role_authority ra
+        ON
+          r.id=ra.role_id
+        LEFT JOIN
+          acct_authority a
+        ON
+          ra.authority_id=a.id
+    </select>
+
+    <!-- 新增角色信息 -->
+    <insert id="insert" parameterType="com.wq.springboot.entity.AcctRole">
+        INSERT INTO
+          acct_role(id, name)
+        VALUES
+          (#{id,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR})
+    </insert>
+
+    <!-- 修改角色信息 -->
+    <update id="update" parameterType="com.wq.springboot.entity.AcctRole">
+        UPDATE
+          acct_role
+        SET
+          name=#{name,jdbcType=VARCHAR}
+        WHERE
+          id=#{id,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 删除角色信息 -->
+    <delete id="delete">
+        DELETE FROM
+          acct_role_authority
+        WHERE
+          role_id=#{id,jdbcType=VARCHAR};
+        DELETE FROM
+          acct_role
+        WHERE
+          id=#{id,jdbcType=VARCHAR};
+    </delete>
+
+    <!-- 根据id获取角色信息 -->
+    <select id="selectById" resultMap="roleMap" parameterType="string">
+        SELECT
+          r.*,ra.role_id,ra.authority_id,a.name authority_name
+        FROM
+          acct_role r
+        LEFT JOIN
+          acct_role_authority ra
+        ON
+          r.id=ra.role_id
+        LEFT JOIN
+          acct_authority a
+        ON
+          ra.authority_id=a.id
+        WHERE
+          r.id=#{id,jdbcType=VARCHAR}
+    </select>
+
+</mapper>

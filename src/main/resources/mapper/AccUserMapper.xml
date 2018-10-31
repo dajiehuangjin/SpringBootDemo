@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wq.springboot.mapper.AccUserMapper">
+    <select id="findAllUserInfo" resultType="com.wq.springboot.entity.AccUser">
+        select * from acc_user;
+    </select>
+    <insert id="addUserInfo" parameterType="com.wq.springboot.entity.AccUser">
+        insert into acc_user(name)
+        values (#{name,jdbcType=VARCHAR})
+    </insert>
+    <delete id="delUserInfo" parameterType="java.lang.Integer">
+        delete from acc_user where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="updateById" parameterType="com.wq.springboot.entity.AccUser">
+        update acc_user set name=#{name,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </insert>
+</mapper>
