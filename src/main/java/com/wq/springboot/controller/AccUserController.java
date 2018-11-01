@@ -3,6 +3,7 @@ package com.wq.springboot.controller;
 import com.wq.springboot.common.json.CallResult;
 import com.wq.springboot.entity.AccUser;
 import com.wq.springboot.service.IAccUserService;
+import com.wq.springboot.service.IHAccUserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -18,6 +19,9 @@ import java.util.List;
 public class AccUserController {
     @Autowired
     private IAccUserService accUserService;
+
+    @Autowired
+    private IHAccUserService h_accUserService;
 
     @RequestMapping("/users")
     public CallResult getUserInfo() {
@@ -48,6 +52,14 @@ public class AccUserController {
         user.setName(userName);
         accUserService.updateById(user);
         return "success: "+userId+"=>"+userName;
+    }
+
+    @RequestMapping("/h_users")
+    public CallResult get_h_users() {
+        List<AccUser> users = h_accUserService.get("id", "desc");
+        CallResult cr = new CallResult(true);
+        cr.setRows(users);
+        return cr;
     }
 
 }

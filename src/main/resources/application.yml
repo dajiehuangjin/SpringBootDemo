@@ -28,17 +28,20 @@ spring:
   jackson:
     serialization:
       indent-output: true
+  #hibernate配置
   jpa:
     show-sql: true
+    database-platform: org.hibernate.dialect.MySQLDialect
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        current_session_context_class: org.springframework.orm.hibernate5.SpringSessionContext
     hibernate:
       ddl-auto: update  # 新增数据库链接必备的参数
       naming:
         physical-strategy: com.wq.springboot.CustomPhysicalNamingStrategy
         # org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
-
+#hibernate配置 end
 mybatis:
   mapperLocations: classpath:mapper/*.xml
   typeAliasesPackage: com.wq.springboot.entity

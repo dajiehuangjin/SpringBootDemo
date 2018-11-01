@@ -50,9 +50,11 @@ public interface BaseDao {
     Object queryUniqueResult(String hql, Map<String, Object> parameters);
 
     Object sqlQueryUniqueueResult(String sql);
-    List<Map<String, Object>> sqlQuery(String sql);
+    @SuppressWarnings("rawtypes")
+    List sqlQuery(String sql);
     Object sqlQueryUniqueueResult(String sql, Map<String, Object> parameters);
-    List<Map<String, Object>> sqlQuery(String sql, Map<String, Object> parameters);
+    @SuppressWarnings("rawtypes")
+    List sqlQuery(String sql, Map<String, Object> parameters);
 
     int sqlExecuteUpdate(String sql);
     int sqlExecuteUpdate(String sql, Map<String, Object> parameters);

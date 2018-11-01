@@ -52,7 +52,7 @@ public class CustomPhysicalNamingStrategy implements PhysicalNamingStrategy {
             if ( part == null || part.trim().isEmpty() ) {
                 continue;
             }
-            result.add( part.toUpperCase( Locale.ROOT ) );
+            result.add( part.toLowerCase( Locale.ROOT ) );
         }
         return result;
     }
@@ -61,6 +61,9 @@ public class CustomPhysicalNamingStrategy implements PhysicalNamingStrategy {
         boolean firstPass = true;
         String separator = "";
         StringBuilder joined = new StringBuilder();
+        if(parts.indexOf("_") >= 0) {
+            firstPass = false;
+        }
         for ( String part : parts ) {
             joined.append( separator ).append( part );
             if ( firstPass ) {

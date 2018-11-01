@@ -29,7 +29,7 @@ public class BaseDaoImpl implements BaseDao {
 	private EntityManagerFactory entityManagerFactory;
 
     private Session getCurrentSession(){
-        return this.entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
+        return this.entityManagerFactory.unwrap(SessionFactory.class).openSession();
 	}
 
 	@Override
@@ -213,8 +213,9 @@ public class BaseDaoImpl implements BaseDao {
         return this.sqlQueryUniqueueResult(sql, null);
     }
 
+    @SuppressWarnings("rawtypes")
     @Override
-    public List<Map<String, Object>> sqlQuery(String sql) {
+    public List sqlQuery(String sql) {
         return this.sqlQuery(sql, null);
     }
 
@@ -230,9 +231,9 @@ public class BaseDaoImpl implements BaseDao {
         return query.uniqueResult();
     }
 
-	@SuppressWarnings({"rawtypes", "unchecked"})
+	@SuppressWarnings("rawtypes")
     @Override
-    public List<Map<String, Object>> sqlQuery(String sql, Map<String, Object> parameters) {
+    public List sqlQuery(String sql, Map<String, Object> parameters) {
 		NativeQuery query = this.getCurrentSession().createNativeQuery(sql);
 		//query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
         if(parameters != null) {
@@ -240,7 +241,7 @@ public class BaseDaoImpl implements BaseDao {
                 query.setParameter(s, parameters.get(s));
             }
         }
-        return query.getResultList();
+        return query.list();
     }
 
     @Override

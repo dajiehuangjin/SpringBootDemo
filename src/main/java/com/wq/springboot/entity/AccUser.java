@@ -2,9 +2,21 @@ package com.wq.springboot.entity;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="acc_user")
+@SuppressWarnings("serial")
 public class AccUser implements Serializable {
-    private static final long serialVersionUID = 1L;
+
+    @Id
+    @Column(name="id")
     private Long id;
+
+    @Column(name="name")
     private String name;
 
     public Long getId() {
