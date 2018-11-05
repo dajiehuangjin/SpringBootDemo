@@ -1,5 +1,4 @@
-package com.wq.springboot;
-
+package com.wq.springboot.config;
 
 import java.util.LinkedList;
 import java.util.List;

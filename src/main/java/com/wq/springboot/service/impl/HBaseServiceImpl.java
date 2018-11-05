@@ -58,6 +58,7 @@ public abstract class HBaseServiceImpl<T extends Serializable, PK extends Serial
 		return baseDao.getCount(entityClass);
 	}
 		
+
 	@Override
 	public void save(T o) {
 		baseDao.save(o);
@@ -76,6 +77,11 @@ public abstract class HBaseServiceImpl<T extends Serializable, PK extends Serial
 	@Override
 	public void deleteById(PK id) {
 		baseDao.deleteById(entityClass, id);
+	}
+
+	@Override
+	public int executeSql(String sql) {
+		return baseDao.executeUpdate(sql);
 	}
 
 }

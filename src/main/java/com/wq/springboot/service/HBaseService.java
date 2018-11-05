@@ -17,5 +17,8 @@ public interface HBaseService<T extends Serializable, PK extends Serializable> {
 	void update(T o);
 	
 	void delete(T o);
+
 	void deleteById(PK id);
+
+	int executeSql(String sql);
 }

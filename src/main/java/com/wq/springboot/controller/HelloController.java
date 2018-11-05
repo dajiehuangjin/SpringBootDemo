@@ -21,15 +21,19 @@ import java.util.Date;
 //@Controller
 @RequestMapping("/hello")
 public class HelloController {
+    //配置文件中的标签
     @Value("${name}")
     private String name;
 
+    //配置文件中的标签
     @Value("${number}")
     private Integer number;
 
+    //配置文件中的标签
     @Value("${content}")
     private String content;
 
+    //配置文件中的标签
     @Value("${student.s_name}")
     private String s_name;
 

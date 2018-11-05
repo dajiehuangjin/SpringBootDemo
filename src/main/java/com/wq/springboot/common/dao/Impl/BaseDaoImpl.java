@@ -1,6 +1,7 @@
 package com.wq.springboot.common.dao.Impl;
 
 import com.wq.springboot.common.dao.BaseDao;
+
 import org.hibernate.NaturalIdLoadAccess;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,23 +15,29 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.EntityManagerFactory;
+// import javax.persistence.EntityManagerFactory;
+import javax.transaction.Transactional;
 
 @Repository
+@Transactional
 public class BaseDaoImpl implements BaseDao {
-    // @Autowired
-    // private SessionFactory sessionFactory;
-
-    // private Session getCurrentSession(){
-    //     return this.sessionFactory.getCurrentSession();
-	// }
-	
-	@Autowired
-	private EntityManagerFactory entityManagerFactory;
+    @Autowired
+    private SessionFactory sessionFactory;
 
     private Session getCurrentSession(){
-        return this.entityManagerFactory.unwrap(SessionFactory.class).openSession();
+        return this.sessionFactory.getCurrentSession();
 	}
+	
+    // @Autowired
+	// private EntityManagerFactory entityManagerFactory;
+
+    // private Session getCurrentSession(){
+    //     Session session;
+
+    //     session = this.entityManagerFactory.unwrap(SessionFactory.class).getCurrentSession();
+
+    //     return session;
+	// }
 
 	@Override
     public Serializable save(Object entity) {
@@ -51,7 +58,6 @@ public class BaseDaoImpl implements BaseDao {
     @Override
     public void persist(Object entity) {
         this.getCurrentSession().persist(entity);
-
     }
 
     @Override
@@ -91,7 +97,7 @@ public class BaseDaoImpl implements BaseDao {
         return this.getCurrentSession().bySimpleNaturalId(clazz).load(idValue);
     }
 
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     @Override
     public Object getByNaturalId(Class<?> clazz, Map<String, Object> idValues) {
         NaturalIdLoadAccess loader = this.getCurrentSession().byNaturalId(clazz);
@@ -179,7 +185,7 @@ public class BaseDaoImpl implements BaseDao {
         return this.queryUniqueResult(hql, null);
     }
 
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     @Override
     public Object queryUniqueResult(String hql, Map<String, Object> parameters) {
         Query query = this.getCurrentSession().createQuery(hql);
@@ -196,7 +202,7 @@ public class BaseDaoImpl implements BaseDao {
         return this.executeUpdate(hql, null);
     }
 
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     @Override
     public int executeUpdate(String hql, Map<String, Object> parameters) {
         Query query = this.getCurrentSession().createQuery(hql);
@@ -219,7 +225,7 @@ public class BaseDaoImpl implements BaseDao {
         return this.sqlQuery(sql, null);
     }
 
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     @Override
     public Object sqlQueryUniqueueResult(String sql, Map<String, Object> parameters) {
         NativeQuery query = this.getCurrentSession().createNativeQuery(sql);
@@ -231,7 +237,7 @@ public class BaseDaoImpl implements BaseDao {
         return query.uniqueResult();
     }
 
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     @Override
     public List sqlQuery(String sql, Map<String, Object> parameters) {
 		NativeQuery query = this.getCurrentSession().createNativeQuery(sql);
@@ -249,7 +255,7 @@ public class BaseDaoImpl implements BaseDao {
         return this.sqlExecuteUpdate(sql, null);
     }
 
-	@SuppressWarnings("rawtypes")
+    @SuppressWarnings("rawtypes")
     @Override
     public int sqlExecuteUpdate(String sql, Map<String, Object> parameters) {
         NativeQuery query = this.getCurrentSession().createNativeQuery(sql);

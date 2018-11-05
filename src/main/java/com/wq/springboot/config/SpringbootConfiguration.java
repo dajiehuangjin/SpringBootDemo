@@ -1,4 +1,4 @@
-package com.wq.springboot;
+package com.wq.springboot.config;
 
 import com.wq.springboot.interceptor.LoginHandlerInterceptor;
 import org.springframework.context.annotation.Configuration;
