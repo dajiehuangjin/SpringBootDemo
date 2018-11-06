@@ -75,7 +75,7 @@ public class AccUserController {
         hAccUserService.deleteById(userId);
         return "delete success: "+userId;
         //  HQL语句中表名应该是ORM映射的类名
-        // int ret = h_accUserService.executeSql("delete from AccUser ac where ac.id="+userId.toString());
+        // int ret = hAccUserService.executeSql("delete from AccUser ac where ac.id="+userId.toString());
         // return "delete success: "+ret;
     }
 
