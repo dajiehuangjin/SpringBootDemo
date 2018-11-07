@@ -1,7 +1,7 @@
-package com.wq.springboot.service.impl;
+package com.wq.springboot.common.service.impl;
 
 import com.wq.springboot.common.mapper.BaseMapper;
-import com.wq.springboot.service.BaseService;
+import com.wq.springboot.common.service.BaseService;
 // import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;

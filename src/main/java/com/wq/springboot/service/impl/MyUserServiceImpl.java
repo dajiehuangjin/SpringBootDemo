@@ -3,6 +3,7 @@ package com.wq.springboot.service.impl;
 import com.wq.springboot.entity.AcctUser;
 import com.wq.springboot.mapper.MyUserMapper;
 import com.wq.springboot.service.IMyUserService;
+import com.wq.springboot.common.service.impl.BaseServiceImpl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
