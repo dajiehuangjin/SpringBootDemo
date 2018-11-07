@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.wq.springboot.entity.AccUser;
 import com.wq.springboot.service.IHAccUserService;
+import com.wq.springboot.common.service.impl.HBaseServiceImpl;
 
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,4 +1,4 @@
-package com.wq.springboot.service.impl;
+package com.wq.springboot.common.service.impl;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
@@ -7,7 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.wq.springboot.common.dao.BaseDao;
-import com.wq.springboot.service.HBaseService;
+import com.wq.springboot.common.service.HBaseService;
 
 public abstract class HBaseServiceImpl<T extends Serializable, PK extends Serializable>
 		implements HBaseService<T, PK> {

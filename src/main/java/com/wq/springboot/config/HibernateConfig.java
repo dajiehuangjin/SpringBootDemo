@@ -29,7 +29,7 @@ public class HibernateConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan(new String[] { "com.wq.springboot.common.dao","com.wq.springboot.service","com.wq.springboot.entity" });
+        sessionFactory.setPackagesToScan(new String[] { "com.wq.springboot.common.dao","com.wq.springboot.common.dao","com.wq.springboot.common.service","com.wq.springboot.entity" });
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
      }

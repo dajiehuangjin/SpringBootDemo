@@ -1,4 +1,4 @@
-package com.wq.springboot.service;
+package com.wq.springboot.common.service;
 
 import java.io.Serializable;
 import java.util.List;
