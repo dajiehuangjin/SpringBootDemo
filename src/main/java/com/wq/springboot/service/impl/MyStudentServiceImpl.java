@@ -5,6 +5,7 @@ import java.util.List;
 import com.wq.springboot.entity.MyStudent;
 import com.wq.springboot.mapper.MyStudentMapper;
 import com.wq.springboot.service.IMyStudentService;
+import com.wq.springboot.common.service.impl.BaseServiceImpl;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
