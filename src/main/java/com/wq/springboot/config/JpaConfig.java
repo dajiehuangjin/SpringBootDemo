@@ -46,7 +46,7 @@ public class JpaConfig {
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setJpaVendorAdapter(vendorAdapter);
-        factory.setPackagesToScan(new String[] { "com.wq.springboot.dao","com.wq.springboot.service","com.wq.springboot.entity" });
+        factory.setPackagesToScan(new String[] { "com.wq.springboot.common.service","com.wq.springboot.dao","com.wq.springboot.service","com.wq.springboot.entity" });
         factory.setDataSource(dataSource());
 
 

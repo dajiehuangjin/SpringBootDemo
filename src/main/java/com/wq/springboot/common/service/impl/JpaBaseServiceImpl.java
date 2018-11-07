@@ -1,4 +1,4 @@
-package com.wq.springboot.service.impl;
+package com.wq.springboot.common.service.impl;
 
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 
-import com.wq.springboot.service.JpaBaseService;
+import com.wq.springboot.common.service.JpaBaseService;
 
 public abstract class JpaBaseServiceImpl<T extends Serializable, PK extends Serializable>
 		implements JpaBaseService<T, PK> {
