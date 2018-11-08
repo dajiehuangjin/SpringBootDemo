@@ -20,7 +20,7 @@ public abstract class JpaBaseServiceImpl<T extends Serializable, PK extends Seri
 	
 	@SuppressWarnings("rawtypes")
 	@Autowired
-	private JpaRepository baseDao;
+	private JpaRepository jpaRepository;
 
 	@Autowired
 	private EntityManagerFactory entityManagerFactory;
@@ -29,53 +29,64 @@ public abstract class JpaBaseServiceImpl<T extends Serializable, PK extends Seri
 	}
 
 	@SuppressWarnings("rawtypes")
-	protected JpaRepository getDao() {
-		return baseDao;
+	protected JpaRepository getJpaRepository() {
+		return jpaRepository;
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public T getById(PK id) {
-		return (T) baseDao.getOne(id);
+		return (T) jpaRepository.getOne(id);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<T> getAll(Sort sortx) {
 		if(sortx != null) {
-			return baseDao.findAll(sortx);
+			return jpaRepository.findAll(sortx);
 		} else {
-			return baseDao.findAll();
+			return jpaRepository.findAll();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public Page<T> getByPage(int pageNo, int pageSize, Sort sortx) {
-		return baseDao.findAll(PageRequest.of(pageNo, pageSize, sortx));
+		return jpaRepository.findAll(PageRequest.of(pageNo, pageSize, sortx));
 	}
 	
 	@Override
 	public long count() {
-		return baseDao.count();
+		return jpaRepository.count();
 	}
 		
 	@SuppressWarnings("unchecked")
 	@Override
 	public void save(T o) {
-		baseDao.save(o);
+		jpaRepository.save(o);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void saveAndFlush(T o) {
+		jpaRepository.saveAndFlush(o);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void delete(T o) {
-		baseDao.delete(o);
+		jpaRepository.delete(o);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public void deleteById(PK id) {
-		baseDao.deleteById(id);
+		jpaRepository.deleteById(id);
+	}
+	
+	@Override
+	public void flush() {
+		jpaRepository.flush();
 	}
 
 	@Override

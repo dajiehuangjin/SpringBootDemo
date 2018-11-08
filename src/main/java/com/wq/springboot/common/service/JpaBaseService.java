@@ -16,10 +16,14 @@ public interface JpaBaseService<T extends Serializable, PK extends Serializable>
 	long count();
 	
 	void save(T o);
+
+	void saveAndFlush(T o);
 	
 	void delete(T o);
 
 	void deleteById(PK id);
+
+	void flush();
 
 	int executeSql(String sql);
 }
