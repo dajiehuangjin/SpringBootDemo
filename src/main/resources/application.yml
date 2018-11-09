@@ -21,9 +21,9 @@ spring:
   thymeleaf:
     cache: false
   datasource:
-    url: 
-    username: 
-    password: 
+    url: jdbc:mysql://www.huakevip.com:3306/spring_mybatis_test?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: aq2222222
     driver-class-name: com.mysql.jdbc.Driver # 驱动
   jackson:
     serialization:
