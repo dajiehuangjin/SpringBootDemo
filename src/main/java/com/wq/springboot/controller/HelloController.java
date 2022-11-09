@@ -2,14 +2,19 @@ package com.wq.springboot.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 //import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.text.DateFormat;
 import java.util.Date;
+
+import com.wq.springboot.config.MessageConfiguration;
+import reactor.core.publisher.Mono;
 
 /**
  * 测试控制器
@@ -42,7 +47,11 @@ public class HelloController {
 
     @RequestMapping("/json")
     public String json() {
-        return "Welcome Spring Boot!<br/>name: "+name+"<br/>number: "+number+"<br/>"+content+"<br/><br/>"+"student属性：<br/>name: " + studentProperties.getS_name() + "<br/>age: " + studentProperties.getS_age();
+        AnnotationConfigApplicationContext ctx = new AnnotationConfigApplicationContext(MessageConfiguration.class);
+        
+        String ret = "Welcome Spring Boot!<br/>name: "+name+"<br/>number: "+number+"<br/>"+content+"<br/><br/>"+"student属性：<br/>name: " + studentProperties.getS_name() + "<br/>age: " + studentProperties.getS_age() + "<br/>my_bean: " + ctx.getBean("my_message");
+        ctx.close();
+        return ret;
     }
 
     @RequestMapping("")
@@ -51,6 +60,15 @@ public class HelloController {
         m.addAttribute("name", s_name);
         ModelAndView mv = new ModelAndView("hello");
         return mv;
+    }
+
+    @GetMapping("/test")
+    public Mono<String> test(Model model) {
+        model.addAttribute("name", "泥瓦匠");
+        model.addAttribute("city", "浙江温岭");
+
+        String path = "test";
+        return Mono.create(monoSink->monoSink.success(path));
     }
 
 }
