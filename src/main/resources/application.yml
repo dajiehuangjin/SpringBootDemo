@@ -19,11 +19,17 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
   thymeleaf:
+    #清除缓存
     cache: false
+    mode: LEGACYHTML5 #非严格模式
+    prefix: /WEB-INF/views/ #默认 classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
   datasource:
-    url: 
-    username: 
-    password: 
+    url: jdbc:mysql://www.huakevip.com:3306/spring_mybatis_test?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: aq2222222
     driver-class-name: com.mysql.jdbc.Driver # 驱动
   jackson:
     serialization:
