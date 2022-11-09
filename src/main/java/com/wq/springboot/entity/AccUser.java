@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="acc_user")
-@SuppressWarnings("serial")
+//@SuppressWarnings("serial")
 public class AccUser implements Serializable {
 
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY)
